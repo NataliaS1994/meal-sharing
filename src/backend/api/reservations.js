@@ -3,10 +3,10 @@ const router = express.Router();
 const knex = require("../database");
 
 //Returns all reservations 
-router.get("/titles", async(request, response) => {
+router.get("/", async(request, response) => {
     try {
         // knex syntax for selecting things. Look up the documentation for knex for further info
-        const titles = await knex("reservations").select("title");
+        const titles = await knex("reservations").select("*");
         response.json(titles);
     } catch (error) {
         throw error;
