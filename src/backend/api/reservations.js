@@ -2,59 +2,93 @@ const express = require("express");
 const router = express.Router();
 const knex = require("../database");
 
-//Returns all reservations 
 router.get("/", async(request, response) => {
     try {
-        // knex syntax for selecting things. Look up the documentation for knex for further info
-        const titles = await knex("reservations").select("*");
-        response.json(titles);
+        const reservations = await knex("reservations");
+        response.json(reservations);
     } catch (error) {
         throw error;
     }
 });
 
-//Adds a new reservation
+router.get("/", async(request, response) => {
+    try {
+        const reservations = await knex("reservations");
+        response.json(reservations);
+    } catch (error) {
+        throw error;
+    }
+});
+
 router.post("/", async(request, response) => {
     try {
-        const newReservation = await knex("reservations").insert(request.body);
-        response.send(`New reservation: ${request.body.title}`);
+        // knex syntax for selecting things. Look up the documentation for knex for further info
+        const reservations = await knex("reservations")
+            .insert({
+                id: request.body.id,
+
+                created_date: request.body.created_date,
+                contact_phonenumber: request.body.contact_phonenumber,
+                contact_name: request.body.contact_name,
+                contact_email: request.body.contact_email,
+                number_of_guests: request.body.number_of_guests,
+                meal_id: request.body.meal_id,
+            })
+            .then(function(result) {
+                response.json({ success: true, message: "ok" }); // respond back to request
+            });
     } catch (error) {
-        console.log(error);
-        response.send(error);
+        throw error;
     }
 });
-//Returns reservation by id
+
 router.get("/:id", async(request, response) => {
     try {
-        const reservationById = await knex("reservations").where("id", parseInt(request.params.id));
-        response.json(reservationById);
+        // knex syntax for selecting things. Look up the documentation for knex for further info
+        const reservations = await knex("reservations").where(
+            "id",
+            request.params.id
+        );
+        response.json(reservations);
     } catch (error) {
-        console.log(error);
-        response.send(error);
+        throw error;
     }
 });
-//Updates the reservation by id	
+
 router.put("/:id", async(request, response) => {
     try {
-        const updateReservationById = await knex("reservations")
-            .where("id", parseInt(request.params.id))
-            .update(request.body);
-        response.json(updateReservationById);
+        // knex syntax for selecting things. Look up the documentation for knex for further info
+        const meals = await knex("reservations")
+            .update({
+                id: request.body.id,
+                number_of_guests: request.body.number_of_guests,
+                meal_id: request.body.meal_id,
+                created_date: request.body.created_date,
+                contact_phonenumber: request.body.contact_phonenumber,
+                contact_name: request.body.contact_name,
+                contact_email: request.body.contact_email,
+            })
+            .where("id", request.params.id)
+            .then(function(result) {
+                response.json({ success: true, message: "ok" }); // respond back to request
+            });
+        //response.json(meals);
     } catch (error) {
-        console.log(error);
-        response.send(error);
+        throw error;
     }
 });
-//Deletes the reservation by id
+
 router.delete("/:id", async(request, response) => {
     try {
-        const deleteReservationById = await knex("reservations")
-            .where("id", parseInt(request.params.id))
-            .del();
-        response.json(`Deleted reservation: ${deleteReservationById}`);
+        // knex syntax for selecting things. Look up the documentation for knex for further info
+        const reservations = await knex("reservations")
+            .where("id", request.params.id)
+            .del()
+            .then(function(result) {
+                response.json({ success: true, message: "ok" }); // respond back to request
+            });
     } catch (error) {
-        console.log(error);
-        response.send(error);
+        throw error;
     }
 });
 
