@@ -11,15 +11,6 @@ router.get("/", async(request, response) => {
     }
 });
 
-router.get("/", async(request, response) => {
-    try {
-        const reservations = await knex("reservations");
-        response.json(reservations);
-    } catch (error) {
-        throw error;
-    }
-});
-
 router.post("/", async(request, response) => {
     try {
         // knex syntax for selecting things. Look up the documentation for knex for further info
