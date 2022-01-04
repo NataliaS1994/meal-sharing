@@ -3,33 +3,13 @@ const router = express.Router();
 const knex = require("../database");
 
 
-router.get("/", async(request, response) => {
-    try {
-        // knex syntax for selecting things. Look up the documentation for knex for further info
-        const titles = await knex("meals").select("title");
-        response.json(titles);
-    } catch (error) {
-        throw error;
-    }
-});
-
-router.get("/", async(request, response) => {
-    try {
-        //console.log(meals)
-        // knex syntax for selecting things. Look up the documentation for knex for further info
-        const meals = await knex("meals");
-        response.json(meals);
-    } catch (error) {
-        throw error;
-    }
-});
-
 router.post("/", async(request, response) => {
     try {
         // knex syntax for selecting things. Look up the documentation for knex for further info
+        const idMeal = await knex ("meals")
         const meals = await knex("meals")
             .insert({
-                id: request.body.id,
+                id: Math.max(0, ...idMeal.map ((item) => item.id)) + 1,
                 title: request.body.title,
                 description: request.body.description,
                 location: request.body.location,
@@ -126,8 +106,8 @@ router.get("/", async(request, response) => {
 
         } else if (availableReservations !== undefined && availableReservations !== "") {
             const filteredReservations = await knex("meals")
-                .join('reservations', 'meal.id', '=', 'reservations.meal_id')
-                //.select('meal_id','max_reservations','number_of_guests')
+                .join('reservations', 'meals.id', '=', 'reservations.meals_id')
+                //.select('meals_id','max_reservations','number_of_guests')
                 .where('max_reservations', '>', 'number_of_guests');
             response.send(filteredReservations);
         } else if (createdAfter !== undefined && createdAfter !== "") {
