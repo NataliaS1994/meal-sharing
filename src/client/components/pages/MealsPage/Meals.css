@@ -16,14 +16,7 @@
         text-align: center;
     }
     
-    @media screen and (max-width: 650px) {
-        .meals .column {
-            width: 100%;
-            display: block;
-        }
-    }
-    
-    .title {
+    h2 {
         font-size: 1.5 rem;
     }
     
@@ -34,9 +27,7 @@
         color: white;
         background-color: #1c2237;
         text-align: center;
-        cursor: pointer;
         width: 40%;
-        margin-top: 8px;
     }
     
     button:hover {
@@ -45,4 +36,11 @@
     
     ul {
         list-style-type: none;
+    }
+    
+    @media screen and (max-width: 650px) {
+        .meals .column {
+            width: 100%;
+            display: block;
+        }
     }

@@ -22,9 +22,9 @@ const Meals = (props) => {
           <li key={(meal.id, i)}>
             <div className="column card">
                 <div className="container">
-                  <h3 className="title">
+                  <h2>
                      <span>{meal.title}</span>
-                  </h3><hr></hr>
+                  </h2><hr></hr>
                   <p>
                     Description: <span>{meal.description}</span>
                   </p><hr></hr>
