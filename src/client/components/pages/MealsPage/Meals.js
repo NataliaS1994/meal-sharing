@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import {getMeals} from "../../../data/meals";
+import "./Meals.css"
 
 const Meals = (props) => {
   const [meals, setMeals] = useState([]);
@@ -14,8 +15,8 @@ const Meals = (props) => {
 
   return (
     <div className="meals">
-      <h1> Meals</h1>
-      <div>
+      <h1> Our Meals</h1>
+      <div className="mealsRow">
       <ul>
         {meals.map((meal, i) => (
           <li key={(meal.id, i)}>
@@ -32,7 +33,7 @@ const Meals = (props) => {
                   </p><hr></hr>
                   <p className="reserve">
                     <Link to={`/meals/${meal.id}`}>
-                      <button >Reserve</button>
+                      <button>Reserve</button>
                     </Link>
                   </p>
               </div>

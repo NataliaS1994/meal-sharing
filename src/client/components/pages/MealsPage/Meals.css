@@ -1,0 +1,48 @@
+    .meals .mealsRow {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: center;
+        flex-direction: column;
+    }
+    
+    .meals .column {
+        display: block;
+        float: left;
+        width: 350px;
+        height: 130px;
+        margin: 16px;
+        border: solid 2px #1c2237;
+        background-color: #44b7bd;
+        text-align: center;
+    }
+    
+    @media screen and (max-width: 650px) {
+        .meals .column {
+            width: 100%;
+            display: block;
+        }
+    }
+    
+    .title {
+        font-size: 1.5 rem;
+    }
+    
+    button {
+        border: none;
+        outline: 0;
+        padding: 8px;
+        color: white;
+        background-color: #1c2237;
+        text-align: center;
+        cursor: pointer;
+        width: 40%;
+        margin-top: 8px;
+    }
+    
+    button:hover {
+        background-color: #d9744c;
+    }
+    
+    ul {
+        list-style-type: none;
+    }
