@@ -1,0 +1,22 @@
+h3 {
+    color: #44b7bd;
+    font-size: 33px;
+    font-weight: normal;
+    line-height: 40px;
+    margin: 0 0 18px;
+    text-shadow: 1px 0 0 #fff;
+}
+
+.addMeal {
+    text-align: center;
+    font-size: larger;
+    padding: 2%;
+}
+
+.addMeal div {
+    padding: 2%;
+}
+
+button {
+    background-color: #1c2237;
+}
