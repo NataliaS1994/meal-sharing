@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Moment from 'moment';
 import "./AddMeal.css";
 
 
@@ -11,7 +10,7 @@ const initialValues = {
     when: "",
     price: "",
 };
-const date = Moment(new Date()).format('YYYY-MM-DD');
+
 
 const AddMeal = () => {
     const [inputValues, setInputValues] = useState(initialValues);
@@ -36,7 +35,7 @@ const AddMeal = () => {
 
 
         try {
-            await postData("/api/meals", meal);
+            await fetch ("/api/meals", meal);
             const messagge = `Great, ${meal.title} is added`;
             alert(messagge);
         } catch {
@@ -77,13 +76,11 @@ const AddMeal = () => {
                 <div>
                     <label htmlFor="when">Date* : </label>
                     <input
-                        type="date"
-                        id="when"
-                        name="when"
-                        required
-                        min={date}
-                        value={inputValues.when}
-                        onChange={handleOnChange}
+                         onChange={(e) => setDate(e.target.value)}  
+                         type="date"
+                         defaultValue={"yyyy-mm-dd"}
+                         placeholder="Date"
+                         required
                     ></input>
                 </div>
                 <div>
@@ -123,7 +120,7 @@ const AddMeal = () => {
                         onChange={handleOnChange}
                     ></textarea>
                 </div>
-                <button type="submit">Add Meal</button>
+                <button>Add Meal</button>
             </form>
         </div>
     );
